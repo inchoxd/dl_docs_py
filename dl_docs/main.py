@@ -3,6 +3,7 @@ import argparse
 
 class dl_docs:
     def dl(self, url, end_page, dl_path=None, start_page=1, z_padding=None):
+        exts = ['.pdf', '.PDF', '.pptx', '.docx', '.png', ',PNG', '.jpg', '.JPG', '.jpeg', '.JPEG']
         if dl_path is None:
             dl_path = './'
         else:
@@ -16,6 +17,8 @@ class dl_docs:
         tmp_name = splt_url[-2]
         dl_name = tmp_name.split('/')[-1]
         ext = splt_url[-1]
+        if ext not in exts:
+            return False
         dl_path = f'{dl_path}{dl_name}.{ext}'
 
         r = requests.get(url=url)
